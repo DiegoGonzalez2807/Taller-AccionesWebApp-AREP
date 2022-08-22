@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+-->
+<html>
+    
+    <head>
+        <title>Bolsa de Valores AREP</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <h1>Deme el acronimo de la empresa para buscarla:</h1>
+            <label for="name">Name:</label><br>
+            <input type="text" id="empresa" name="name" placeholder="Example:MSFT"><br><br>
+            <input type="button" value="Submit" onclick="loadValues()">
+
+            <input type="button" id ="intra" value="Intraday"  onclick="loadValues()">
+            <input type="button" id ="daily" value="Daily" onclick="loadValues()">
+            <input type="button" id ="week" value="Weekly" onclick="loadValues()">
+            <input type="button" id ="month" value="Monthly" onclick="loadValues()">
+
+    </body>
+    <!--Nota: Siempre que se vaya a hacer conexion con JS, revisar que quede de esta manera el src-->
+    <script type="text/javascript" src="js/appConnection.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</html>
