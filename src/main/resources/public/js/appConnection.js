@@ -44,10 +44,29 @@ function visibleInformation(res){
         document.getElementById('daily').style.visibility = "visible";
         document.getElementById('week').style.visibility = "visible";
         document.getElementById('month').style.visibility = "visible";
+        URL_Buttons(res)
     }
     else{
         invisibleInformation()
     }
     
+}
+
+/**
+ * Funcion generada para retornar valores de redireccion
+ * a los botones que se acaban de hacer visibles en la 
+ * pagina HTML de acuerdo con la cantidad de tiempo que
+ * digan los botones
+ * @param {String} date 
+ */
+function Loading_Per_Date(date){
+    var URL_DATE = "http://localhost:4567/search/"+document.getElementById("empresa").value+"/"+date;
+    axios.get(URL_DATE)
+        .then(function(res){
+            console.log(res.data)
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
 }
 

@@ -3,7 +3,9 @@ package edu.escuelaing.arem;
 import static spark.Spark.*;
 import edu.escuelaing.arem.Connection.HttpConnection;
 
-
+/**
+ * author: Diego Gonzalez
+ */
 public class App 
 {    
     
@@ -23,12 +25,23 @@ public class App
         //para la busqueda de empresa mediante API de bolsa de valores
         path("/search", ()->{
             System.out.println("ENTRA A SEARCH");
+            get("/:value/:date", (req,res)->{
+                System.out.println("ENTRA A SEGUNDO CON /VALUE/DATE "+req.params(":date"));
+                return null;
+                //return new StringBuffer(HttpConnection.getData(req.params(":date")));
+            });        
             get("/:value", (req,res)->{
                 return new StringBuffer(HttpConnection.getData(req.params(":value")));
             });
         });
+
     }
     
+    /**
+     * Funcion generada para generar un puerto por defecto
+     * para conectarse a la aplicacion web
+     * @return
+     */
     static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));

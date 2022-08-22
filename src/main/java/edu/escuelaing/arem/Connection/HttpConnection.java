@@ -13,8 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 public class HttpConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String GET_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo";
-
 
     public static StringBuffer getData(String empresa) throws IOException {
         String possibleURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+empresa+"&apikey=demo";
