@@ -44,7 +44,6 @@ function visibleInformation(res){
         document.getElementById('daily').style.visibility = "visible";
         document.getElementById('week').style.visibility = "visible";
         document.getElementById('month').style.visibility = "visible";
-        URL_Buttons(res)
     }
     else{
         invisibleInformation()

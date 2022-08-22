@@ -25,11 +25,12 @@ public class App
         //para la busqueda de empresa mediante API de bolsa de valores
         path("/search", ()->{
             System.out.println("ENTRA A SEARCH");
+            //Primer get. Sirve en caso de URLs como /IBM/TIME_SERIES_INTRADAY
             get("/:value/:date", (req,res)->{
                 System.out.println("ENTRA A SEGUNDO CON /VALUE/DATE "+req.params(":date"));
-                return null;
-                //return new StringBuffer(HttpConnection.getData(req.params(":date")));
+                return new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date"))));
             });        
+            //Segundo get. Sirve en caso de 
             get("/:value", (req,res)->{
                 return new StringBuffer(HttpConnection.getData(req.params(":value")));
             });
