@@ -1,15 +1,17 @@
 package edu.escuelaing.arem;
 
 import static spark.Spark.*;
+
 import edu.escuelaing.arem.Connection.HttpConnection;
+import edu.escuelaing.arem.Cache.cacheData;
 
 /**
  * author: Diego Gonzalez
  */
 public class App 
-{    
-    
+{
     public static void main( String[] args ){
+        cacheData cache = new cacheData();
         port(getPort());
         staticFiles.location("/public");
 
@@ -27,15 +29,27 @@ public class App
             System.out.println("ENTRA A SEARCH");
             //Primer get. Sirve en caso de URLs como /IBM/TIME_SERIES_INTRADAY
             get("/:value/:date", (req,res)->{
+                System.out.println(cache.getKeys());
                 System.out.println("ENTRA A SEGUNDO CON /VALUE/DATE "+req.params(":date"));
-                return new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date"))));
+                if(cache.existsCache(req.params(":value")+" "+req.params(":date"))){
+                    return cache.getInfoCache(req.params(":value")+" "+req.params(":date"));
+                }
+                else{
+                    cache.insertInCache(req.params(":value")+" "+req.params(":date"), new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date")))));               
+                    return new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date"))));
+                }
             });        
-            //Segundo get. Sirve en caso de 
-            get("/:value", (req,res)->{
-                return new StringBuffer(HttpConnection.getData(req.params(":value")));
+            //Segundo get. Sirve en caso de solo buscar la empresa
+            get("/:value", (req,res)->{ 
+                if(cache.existsCache(req.params(":value")+" TIME_SERIES_DAILY")){
+                    return cache.getInfoCache(req.params(":value")+" TIME_SERIES_DAILY");
+                }
+                else{
+                    cache.insertInCache(req.params(":value")+" TIME_SERIES_DAILY", new StringBuffer(HttpConnection.getData(req.params(":value"))));               
+                    return new StringBuffer(HttpConnection.getData(req.params(":value")));
+                }
             });
         });
-
     }
     
     /**

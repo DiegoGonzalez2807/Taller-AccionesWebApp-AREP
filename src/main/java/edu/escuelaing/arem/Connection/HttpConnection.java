@@ -3,7 +3,7 @@ package edu.escuelaing.arem.Connection;
 
 /**
  *
- * @author diego
+ * @author Diego Gonzalez
  */
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class HttpConnection {
         in.close();
 
         // print result
-        System.out.println(response.toString());
+        //System.out.println(response.toString());
         return response;
     }
 
@@ -86,9 +86,6 @@ public class HttpConnection {
         System.out.println(possibleURL);
         HttpURLConnection con = connecting(possibleURL);
         return getResponse(con);
-    }
-    public static void main(String[] args) throws IOException {
-        System.out.println("Welcome");
     }
 
 }
