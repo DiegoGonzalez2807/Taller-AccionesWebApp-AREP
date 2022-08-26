@@ -29,8 +29,6 @@ public class App
             System.out.println("ENTRA A SEARCH");
             //Primer get. Sirve en caso de URLs como /IBM/TIME_SERIES_INTRADAY
             get("/:value/:date", (req,res)->{
-                System.out.println(cache.getKeys());
-                System.out.println("ENTRA A SEGUNDO CON /VALUE/DATE "+req.params(":date"));
                 if(cache.existsCache(req.params(":value")+" "+req.params(":date"))){
                     return cache.getInfoCache(req.params(":value")+" "+req.params(":date"));
                 }

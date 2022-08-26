@@ -23,15 +23,27 @@ invisibleInformation()
  * de la empresa mediante la API
  */
 function loadValues(){
+    document.getElementById("actionInfo").style.visibility = "hidden"
+    document.getElementById("allInfo").style.visibility = "hidden"
     var URL_API = "http://localhost:4567/search/"+document.getElementById("empresa").value;
     axios.get(URL_API)
         .then(function(res){
             visibleInformation(res)
-            console.log(res.data)
         })
         .catch(function (error) {
             console.log(error)
         })
+}
+
+/**
+ * Funcion encargada de ingresar en la pagina HTML la informacion
+ * JSON que se trajo de la API para que el usuario la pueda revisar
+ * @param {Stringfy(JSON)} info 
+ */
+function printingImportantInfo(info){
+    div = document.getElementById("allInfo");
+    div.style.visibility = "visible"
+    div.innerHTML = JSON.stringify(info,null,2);
 }
 
 /**
@@ -62,10 +74,27 @@ function Loading_Per_Date(date){
     var URL_DATE = "http://localhost:4567/search/"+document.getElementById("empresa").value+"/"+date;
     axios.get(URL_DATE)
         .then(function(res){
-            console.log(res.data)
+            printingInformation(res.data["Meta Data"]);
+            printingImportantInfo(res.data)
         })
         .catch(function (error) {
             console.log(error)
         })
 }
+
+/**
+ * Funcion encargada de imprimir en HTML la informacion general
+ * del archivo JSON que nos trajo la API 
+ * @param {JSON list} list 
+ */
+function printingInformation(list){
+    var info = document.getElementById("actionInfo");
+    info.style.visibility = "visible";
+    //Insercion a  HTML de la info de la empresa
+    info.innerHTML ="<h2>Información acerca de la consulta</h2>"+"<br>"+"Símbolo: "+JSON.stringify(list["2. Symbol"]+"<br>"
+    +"Ultima Actualizacion: "+JSON.stringify(list["3. Last Refreshed"])+"<br>"
+    +"Zona horaria: "+JSON.stringify(list["4. Time Zone"]));
+    
+}
+
 
