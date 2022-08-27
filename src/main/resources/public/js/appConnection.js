@@ -29,6 +29,7 @@ function loadValues(){
     axios.get(URL_API)
         .then(function(res){
             visibleInformation(res)
+            console.log(res.data)
         })
         .catch(function (error) {
             console.log(error)
@@ -51,7 +52,7 @@ function printingImportantInfo(info){
  * con la condicion de que la empresa si este registrada en la API
  */
 function visibleInformation(res){
-    if(res.data["Meta Data"] != null){
+    if(res.data["Meta Data"]!= null || res.data["queryCount"] != 0){
         document.getElementById('intra').style.visibility = "visible";
         document.getElementById('daily').style.visibility = "visible";
         document.getElementById('week').style.visibility = "visible";
@@ -60,7 +61,6 @@ function visibleInformation(res){
     else{
         invisibleInformation()
     }
-    
 }
 
 /**
@@ -74,27 +74,11 @@ function Loading_Per_Date(date){
     var URL_DATE = "http://localhost:4567/search/"+document.getElementById("empresa").value+"/"+date;
     axios.get(URL_DATE)
         .then(function(res){
-            printingInformation(res.data["Meta Data"]);
             printingImportantInfo(res.data)
         })
         .catch(function (error) {
             console.log(error)
         })
-}
-
-/**
- * Funcion encargada de imprimir en HTML la informacion general
- * del archivo JSON que nos trajo la API 
- * @param {JSON list} list 
- */
-function printingInformation(list){
-    var info = document.getElementById("actionInfo");
-    info.style.visibility = "visible";
-    //Insercion a  HTML de la info de la empresa
-    info.innerHTML ="<h2>Información acerca de la consulta</h2>"+"<br>"+"Símbolo: "+JSON.stringify(list["2. Symbol"]+"<br>"
-    +"Ultima Actualizacion: "+JSON.stringify(list["3. Last Refreshed"])+"<br>"
-    +"Zona horaria: "+JSON.stringify(list["4. Time Zone"]));
-    
 }
 
 

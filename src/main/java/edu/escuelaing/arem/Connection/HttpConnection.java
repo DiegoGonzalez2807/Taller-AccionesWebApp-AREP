@@ -8,12 +8,10 @@ package edu.escuelaing.arem.Connection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class HttpConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
-
     /**
      * Funcion generada para retornar informacion de la empresa por defecto en un tiempo diario
      * Esta funcion se usa para revisar que la empresa si este registrada en la API
@@ -22,7 +20,8 @@ public class HttpConnection {
      * @throws IOException
      */
     public static StringBuffer getData(String empresa) throws IOException {
-        String possibleURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+empresa+"&apikey=demo";
+        //String possibleURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+empresa+"&apikey=demo";
+        String possibleURL = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
         HttpURLConnection con = connecting(possibleURL);
 
         //The following invocation perform the connection implicitly before getting the code
@@ -82,10 +81,40 @@ public class HttpConnection {
      * @throws IOException
      */
     public static StringBuffer getDataPerDate(String empresa, String date) throws IOException{
-        String possibleURL =  "https://www.alphavantage.co/query?function="+date+"&symbol="+empresa+"&apikey=demo";
-        System.out.println(possibleURL);
-        HttpURLConnection con = connecting(possibleURL);
+        String possibleUrl = "";
+        String realDate = realValueDate(date);
+        //possibleUrl =  "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&apikey=demo";
+        //if(date.equals("minute")){
+         //   possibleUrl = "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&interval=5min&apikey=demo";
+        //}
+        possibleUrl = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/"+date+"/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
+        System.out.println(possibleUrl);
+        HttpURLConnection con = connecting(possibleUrl);
         return getResponse(con);
+    }
+
+    /**
+     * Funcion generada para retornar el valor correcto del tiempo para la URL
+     * en caso de usar la API de Alphavantage
+     * @param date
+     * @return -> String 
+     */
+    public static String realValueDate(String date){
+        switch(date){
+            case "day":
+                date = "TIME_SERIES_DAILY";
+                break;
+            case "week":
+                date = "TIME_SERIES_WEEKLY";
+                break;
+            case "month":
+                date = "TIME_SERIES_MONTHLY";
+                break;
+            case "minute":
+                date = "TIME_SERIES_INTRADAY";
+                break;
+        }
+        return date;
     }
 
 }
