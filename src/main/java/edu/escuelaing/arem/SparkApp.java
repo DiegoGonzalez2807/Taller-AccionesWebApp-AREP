@@ -8,7 +8,7 @@ import edu.escuelaing.arem.Cache.cacheData;
 /**
  * author: Diego Gonzalez
  */
-public class App 
+public class SparkApp 
 {
     public static void main( String[] args ){
         cacheData cache = new cacheData();
