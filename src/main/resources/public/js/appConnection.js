@@ -26,8 +26,8 @@ invisibleInformation()
  */
 function loadValues(){
     document.getElementById("allInfo").style.visibility = "hidden"
-    //var URL_API = "https://serene-bastion-37080.herokuapp.com/search/"+document.getElementById("empresa").value;
-    var URL_API = "http://localhost:4567/search/"+APIRedirect+"/"+document.getElementById("empresa").value;
+    var URL_API = "https://serene-bastion-37080.herokuapp.com/search/"+APIRedirect+"/"+document.getElementById("empresa").value;
+    //var URL_API = "http://localhost:4567/search/"+APIRedirect+"/"+document.getElementById("empresa").value;
 
     axios.get(URL_API)
         .then(function(res){
@@ -83,8 +83,8 @@ function setValueAPI(data){
  * @param {String} date 
  */
 function Loading_Per_Date(date){
-    //var URL_DATE = "https://serene-bastion-37080.herokuapp.com/search/"+document.getElementById("empresa").value+"/"+date;
-    var URL_DATE ="http://localhost:4567/search/"+APIRedirect+"/"+document.getElementById("empresa").value+"/"+date;
+    var URL_DATE = "https://serene-bastion-37080.herokuapp.com/search/"+APIRedirect+"/"+document.getElementById("empresa").value+"/"+date;
+    //var URL_DATE ="http://localhost:4567/search/"+APIRedirect+"/"+document.getElementById("empresa").value+"/"+date;
     axios.get(URL_DATE)
         .then(function(res){
             printingImportantInfo(res.data)
