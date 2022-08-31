@@ -71,6 +71,7 @@ function visibleInformation(res){
  * @param {String} data 
  */
 function setValueAPI(data){
+    invisibleInformation();
     this.APIRedirect = data;
     loadValues();
 }
