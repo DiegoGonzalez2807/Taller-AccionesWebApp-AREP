@@ -1,87 +1,46 @@
-# Project Title
+# TAREA INTRODUCCIÓN MVN-GIT Y HEROKU
 
-One Paragraph of project description goes here
+El siguiente repositorio se crea con el fin de afianzar conocimientos frente a temas MVN, GIT, HEROKU. También la interacción con API's externas mediante protocolos REST.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+ - Maven - Administrador de dependencias y administrador del ciclo de vida del proyecto
+ - Java - Ambiente de desarrollo
+ - Git - Sistema de control de versiones
+ - Heroku - Plataforma de despliegue
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Para descargar el proyecto y compilarlo de manera local puede clonar el repositorio con el siguiente comando:
 
-Say what the step will be
+    git clone https://github.com/DiegoGonzalez2807/Taller-AccionesWebApp-AREP.git
+     
 
-```
-Give the example
-```
+Ejecutar el programa mediante consola con el siguiente comando. También genera el ciclo de vida de este.
 
-And repeat
+    mvn clean package exec:java -D "exec.mainClass"="edu.escuelaing.arem.SparkApp"
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Para ejecutar las pruebas unitarias se ejecutan con el siguiente comando: 
 
-### Break down into end to end tests
+    mvn test
 
-Explain what these tests test and why
+## Documentation
 
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Para crear la documentación del proyecto se hace con el siguiente comando:
+    
+    mvn javadoc:javadoc
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Diego Gonzalez** 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL-3.0 license
 
-## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
