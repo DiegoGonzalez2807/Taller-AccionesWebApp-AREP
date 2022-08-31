@@ -17,6 +17,7 @@ public class SparkApp
 
         //primer path. Se encarga de redireccionar hacia
         //la pagina index.html
+
         get("/inicio", (req, res) -> {
             res.redirect("/index.html");
 
@@ -25,26 +26,27 @@ public class SparkApp
 
         //segundo path. Se encarga de enviar los parametros 
         //para la busqueda de empresa mediante API de bolsa de valores
-        path("/search", ()->{
-            System.out.println("ENTRA A SEARCH");
+        
+        
+        path("/search", ()->{   
             //Primer get. Sirve en caso de URLs como /IBM/TIME_SERIES_INTRADAY
-            get("/:value/:date", (req,res)->{
-                if(cache.existsCache(req.params(":value")+" "+req.params(":date"))){
-                    return cache.getInfoCache(req.params(":value")+" "+req.params(":date"));
+            get("/:API/:value/:date", (req,res)->{
+                if(cache.existsCache(req.params(":value")+" "+req.params(":date")+" "+req.params(":API"))){
+                    return cache.getInfoCache(req.params(":value")+" "+req.params(":date")+" "+req.params(":API"));
                 }
                 else{
-                    cache.insertInCache(req.params(":value")+" "+req.params(":date"), new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date")))));               
-                    return new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date"))));
+                    cache.insertInCache(req.params( ":value")+" "+req.params(":date")+" "+req.params(":API"), new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date")),req.params(":API"))));               
+                    return new StringBuffer(HttpConnection.getDataPerDate(req.params(":value"),req.params((":date")),req.params(":API")));
                 }
             });        
             //Segundo get. Sirve en caso de solo buscar la empresa
-            get("/:value", (req,res)->{ 
-                if(cache.existsCache(req.params(":value")+" TIME_SERIES_DAILY")){
-                    return cache.getInfoCache(req.params(":value")+" TIME_SERIES_DAILY");
+            get("/:API/:value", (req,res)->{ 
+                if(cache.existsCache(req.params(":value")+" TIME_SERIES_DAILY "+req.params(":API"))){
+                    return cache.getInfoCache(req.params(":value")+" TIME_SERIES_DAILY "+req.params(":API"));
                 }
                 else{
-                    cache.insertInCache(req.params(":value")+" TIME_SERIES_DAILY", new StringBuffer(HttpConnection.getData(req.params(":value"))));               
-                    return new StringBuffer(HttpConnection.getData(req.params(":value")));
+                    cache.insertInCache(req.params(":value")+" TIME_SERIES_DAILY "+req.params(":API"), new StringBuffer(HttpConnection.getData(req.params(":value"), req.params(":API"))));               
+                    return new StringBuffer(HttpConnection.getData(req.params(":value"), req.params(":API")));
                 }
             });
         });

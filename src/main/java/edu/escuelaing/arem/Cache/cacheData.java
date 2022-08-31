@@ -6,11 +6,12 @@ package edu.escuelaing.arem.Cache;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class cacheData {
 
     //Inicializacion cache HashMap
-    Map<String, StringBuffer> cacheBolsa = new HashMap<String, StringBuffer>();
+    ConcurrentHashMap<String, StringBuffer> cacheBolsa = new ConcurrentHashMap<String, StringBuffer>();
 
     /**
      * Funcion generada para revisar si en el arreglo de hashmap existe 

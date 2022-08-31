@@ -19,9 +19,14 @@ public class HttpConnection {
      * @return
      * @throws IOException
      */
-    public static StringBuffer getData(String empresa) throws IOException {
-        //String possibleURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+empresa+"&apikey=demo";
-        String possibleURL = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
+    public static StringBuffer getData(String empresa, String API) throws IOException {
+        String possibleURL = ""; 
+        if(API.equals("polygon")){
+             possibleURL = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
+        } 
+        else{
+             possibleURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+empresa+"&apikey=demo";
+        }      
         HttpURLConnection con = connecting(possibleURL);
 
         //The following invocation perform the connection implicitly before getting the code
@@ -80,15 +85,20 @@ public class HttpConnection {
      * @return
      * @throws IOException
      */
-    public static StringBuffer getDataPerDate(String empresa, String date) throws IOException{
+    public static StringBuffer getDataPerDate(String empresa, String date, String API) throws IOException{
         String possibleUrl = "";
         String realDate = realValueDate(date);
-        //possibleUrl =  "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&apikey=demo";
-        //if(date.equals("minute")){
-         //   possibleUrl = "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&interval=5min&apikey=demo";
-        //}
-        possibleUrl = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/"+date+"/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
-        System.out.println(possibleUrl);
+        if(API.equals("alpha")){
+            if(date.equals("minute")){
+                possibleUrl = "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&interval=5min&apikey=demo";
+            }
+            else{
+                possibleUrl =  "https://www.alphavantage.co/query?function="+realDate+"&symbol="+empresa+"&apikey=demo";
+            }
+        }
+        else if(API.equals("polygon")){
+            possibleUrl = "https://api.polygon.io/v2/aggs/ticker/"+empresa+"/range/1/"+date+"/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=H5r6suozuTEfd7ZVFGh7HIEcetpLyIKf";
+        }  
         HttpURLConnection con = connecting(possibleUrl);
         return getResponse(con);
     }

@@ -12,7 +12,12 @@
             <h1>Deme el acronimo de la empresa para buscarla:</h1>
             <label for="name">Name:</label><br>
             <input type="text" id="empresa" name="name" placeholder="Example:MSFT"><br><br>
-            <input type="button" value="Submit" style="margin-bottom: 1rem;" onclick="loadValues()">
+
+<div id="actionAPI" style="margin-bottom: 1rem;">
+    <input type="button" id ="alpha" value="alpha"  onclick="setValueAPI('alpha')">
+    <input type="button" id ="polygon" value="polygon" onclick="setValueAPI('polygon')">
+</div>
+
 <div>
     <input type="button" id ="intra" value="Intraday"  onclick="Loading_Per_Date('minute')">
     <input type="button" id ="daily" value="Daily" onclick="Loading_Per_Date('day')">
@@ -20,7 +25,6 @@
     <input type="button" id ="month" value="Monthly" onclick="Loading_Per_Date('month')">
 </div>
 
-<div id="actionInfo" style="visibility: hidden;margin-bottom: 2rem;"></div>
 <pre id="allInfo"></pre>
            
 
