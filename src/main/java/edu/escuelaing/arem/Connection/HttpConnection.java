@@ -15,9 +15,10 @@ public class HttpConnection {
     /**
      * Funcion generada para retornar informacion de la empresa por defecto en un tiempo diario
      * Esta funcion se usa para revisar que la empresa si este registrada en la API
-     * @param empresa
-     * @return
-     * @throws IOException
+     * @param empresa String con nombre de la empresa
+     * @param API String con nombre de la API
+     * @return StringBuffer con los datos de la empresa traidos del API
+     * @throws IOException Exception
      */
     public static StringBuffer getData(String empresa, String API) throws IOException {
         String possibleURL = ""; 
@@ -42,9 +43,9 @@ public class HttpConnection {
      * Funcion generada para generar la respuesta de la API al usuario mediante
      * la terminal. De igual manera envía un response al front para que ellos 
      * obtengan el JSON
-     * @param con
-     * @return
-     * @throws IOException
+     * @param con HttpConnection, canal de conexion entre el usuario y el API
+     * @return StringBuffer con la informacion traida de la URL
+     * @throws IOException Exception
      */
     public static StringBuffer getResponse(HttpURLConnection con) throws IOException{
         BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -65,9 +66,9 @@ public class HttpConnection {
     /**
      * Funcion generada para abrir el canal de conexion mediante HTTP hacia
      * la URL dada por el usuario
-     * @param URL
-     * @return
-     * @throws IOException
+     * @param URL String URL 
+     * @return HttpURLConnection canal de conexion entre usuario y API
+     * @throws IOException Exception
      */
     public static HttpURLConnection connecting(String URL) throws IOException {
         URL obj = new URL(URL);
@@ -80,10 +81,10 @@ public class HttpConnection {
     /**
      * Funcion encargada de retornar el JSON correspondiente al mercado
      * de valores de la empresa en un periodo de tiempo determinado
-     * @param empresa
-     * @param date
-     * @return
-     * @throws IOException
+     * @param empresa String del nombre de la empresa 
+     * @param date String con la fecha que se quiere revisar en el API
+     * @return StringBuffer con los datos especificos de la empresa 
+     * @throws IOException Exception
      */
     public static StringBuffer getDataPerDate(String empresa, String date, String API) throws IOException{
         String possibleUrl = "";
@@ -106,8 +107,8 @@ public class HttpConnection {
     /**
      * Funcion generada para retornar el valor correcto del tiempo para la URL
      * en caso de usar la API de Alphavantage
-     * @param date
-     * @return -> String 
+     * @param date String con la fecha 
+     * @return String valor real de la fecha para la API alphavantage
      */
     public static String realValueDate(String date){
         switch(date){

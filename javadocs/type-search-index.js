@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"edu.escuelaing.arem.Cache","l":"cacheData"},{"p":"edu.escuelaing.arem.Connection","l":"HttpConnection"},{"p":"edu.escuelaing.arem","l":"SparkApp"}]
